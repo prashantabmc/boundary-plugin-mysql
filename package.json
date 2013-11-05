@@ -1,0 +1,26 @@
+{
+	"name": "graphdat-mysql-plugin",
+	"version": "0.0.1",
+	"private": false,
+	"description": "MySQL plugin for Graphat",
+	"main": "index.js",
+	"devDependencies": {},
+	"dependencies": {
+		"mysql" : "2.x.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/graphdat/plugin-mysql"
+	},
+	"keywords": [
+		"graphdat",
+		"plugin",
+		"mysql"
+	],
+	"author": "Graphdat <support@graphdat.com>",
+	"license": "Apache v2",
+	"bugs": {
+		"url": "https://github.com/graphdat/plugin-mysql/issues"
+	},
+	"engine": "node >= 0.8.1"
+}

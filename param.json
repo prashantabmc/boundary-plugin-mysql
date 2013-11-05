@@ -1,0 +1,7 @@
+{
+   "hostname": "your-mysql-server",
+   "port": 3306,
+   "username": "your-username",
+   "password": "your-password",
+   "pollInterval": 1000
+}

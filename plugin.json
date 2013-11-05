@@ -1,0 +1,71 @@
+{
+    "description" : "Displays important mysql metrics",
+    "icon" : "icon.png",
+    "command" : "node index.js",
+    "postExtract" : "npm install",
+    "ignore" : "node_modules",
+
+    "metrics" : [
+        "MYSQL_CONNECTIONS",
+        "MYSQL_ABORTED_CONNECTIONS",
+        "MYSQL_BYTES_IN",
+        "MYSQL_BYTES_OUT",
+        "MYSQL_SLOW_QUERIES",
+        "MYSQL_ROW_MODIFICATIONS",
+        "MYSQL_ROW_READS",
+        "MYSQL_TABLE_LOCKS",
+        "MYSQL_TABLE_LOCKS_WAIT",
+        "MYSQL_COMMITS",
+        "MYSQL_ROLLBACKS",
+        "MYSQL_QCACHE_MEMORY",
+        "MYSQL_QCACHE_HITS",
+        "MYSQL_QCACHE_PRUNES"
+    ],
+
+    "dashboards" : [
+        {
+            "name" : "mysql",
+            "layout" : "d-w=3&d-h=3&d-pad=5&d-bg=none&d-g-MYSQL_CONNECTIONS=0-0-1-1-t&d-g-MYSQL_ABORTED_CONNECTIONS=0-0-1-1-b&d-g-MYSQL_BYTES_IN=1-0-1-1-t&d-g-MYSQL_BYTES_OUT=1-0-1-1-b&d-g-MYSQL_COMMITS=2-0-1-1-t&d-g-MYSQL_ROLLBACKS=2-0-1-1-b&d-g-MYSQL_QCACHE_HITS=0-2-1-1&d-g-MYSQL_ROW_READS=0-1-1-1-t&d-g-MYSQL_ROW_MODIFICATIONS=0-1-1-1-b&d-g-MYSQL_QCACHE_MEMORY=1-2-1-1&d-g-MYSQL_SLOW_QUERIES=2-1-1-1&d-g-MYSQL_QCACHE_PRUNES=2-2-1-1&d-g-MYSQL_TABLE_LOCKS=1-1-1-1-t&d-g-MYSQL_TABLE_LOCKS_WAIT=1-1-1-1-b"
+        }
+    ],
+
+    "paramSchema" : [
+        {
+            "title" : "Hostname",
+            "name" : "hostname",
+            "description" : "The hostname of the MySQL Server (Socket Path or Hostname is required)",
+            "type" : "string"
+        },
+        {
+            "title" : "Port",
+            "name" : "port",
+            "description" : "Port to use when accessing the MySQL Server",
+            "type" : "string",
+            "default": 3306
+        },
+        {
+            "title" : "Socket Path",
+            "name" : "socketPath",
+            "description" : "The Socket Path used to access the MySQL Server (Socket Path or Hostname is required)",
+            "type" : "string"
+        },
+        {
+            "title" : "Username",
+            "name" : "username",
+            "description" : "Username to the MySQL database",
+            "type" : "string"
+        },
+        {
+            "title" : "Password",
+            "name" : "password",
+            "description" : "Pasword to the MySQL database",
+            "type" : "password"
+        },
+        {
+            "title" : "Source",
+            "name" : "source",
+            "description" : "The Source to display in the legend for the mysql data.  It will default to the hostname of the server",
+            "type" : "string"
+        }
+    ]
+}
