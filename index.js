@@ -8,6 +8,7 @@ var _format = require('util').format;
 var _mysql = require('mysql');
 var _os = require('os');
 var _param = require('./param.json');
+var _tools = require('graphdat-plugin-tools');
 
 var _connection; // the mysql connection
 var _pollInterval; // the interval to poll the metrics
