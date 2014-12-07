@@ -27,6 +27,7 @@ None
 
 ### Metrics Collected
 Tracks the following metrics for [mysql](http://www.mysql.com/)
+
 |Metric Name              |Description                                                                   |
 |:------------------------|:-----------------------------------------------------------------------------|
 |MySQL Connections        |The number of connection attempts                                             |
@@ -44,11 +45,3 @@ Tracks the following metrics for [mysql](http://www.mysql.com/)
 |MySQL Query Cache Hits   |The percentage of queries from cache                                          |
 |MySQL Query Cache Prunes |The number of queries delete from the query cache                             |
 
-### Installation & Configuration
-
-* The `hostname` used to contact the SQL server, either a hostname or a socketPath is required
-* The `port` used to contact the SQL server, defaults to 3306
-* The `socketPath` used to contact the SQL server, either a hostname or a socketPath is required
-* The `username` used to contact the SQL server
-* The `passsword` used to contact the SQL server
-* The `source` to prefix the display in the legend for the mysql data.  It will default to the hostname of the server.
