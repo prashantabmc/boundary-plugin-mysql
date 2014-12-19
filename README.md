@@ -21,8 +21,8 @@ None
 |Hostname   |The hostname of the MySQL Server (Socket Path or Hostname is required)                                |
 |Port       |Port to use when accessing the MySQL Server                                                           |
 |Socket Path|The Socket Path used to access the MySQL Server (Socket Path or Hostname is required)                 |
-|Username   |Username to the access the MySQL database                                                             |
-|Password   |Pasword to the access the MySQL database                                                              |
+|Username   |Username to access the MySQL database (Username is required)                                          |
+|Password   |Password to access the MySQL database (Password is required)                                          |
 |Source     |The Source to display in the legend for the mysql data.  It will default to the hostname of the server|
 
 ### Metrics Collected

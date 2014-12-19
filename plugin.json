@@ -52,13 +52,13 @@
         {
             "title" : "Username",
             "name" : "username",
-            "description" : "Username to the access the MySQL database",
+            "description" : "Username to access the MySQL database (Username is required)",
             "type" : "string"
         },
         {
             "title" : "Password",
             "name" : "password",
-            "description" : "Pasword to the access the MySQL database",
+            "description" : "Password to access the MySQL database (Password is required)",
             "type" : "password"
         },
         {
