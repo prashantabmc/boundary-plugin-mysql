@@ -1,6 +1,6 @@
 Boundary MySQL Plugin
 ---------------------
-Collects metrics from a MySQL database instance.
+Collects metrics from a MySQL database instance. See video [walkthrough](https://help.boundary.com/hc/articles/201536772)
 
 ### Prerequisites
 
