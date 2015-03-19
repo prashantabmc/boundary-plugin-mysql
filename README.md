@@ -1,13 +1,27 @@
-Boundary MySQL Plugin
----------------------
+# Boundary MySQL Plugin
+
 Collects metrics from a MySQL database instance. See video [walkthrough](https://help.boundary.com/hc/articles/201536772).
 
-### Prerequisites
+## Prerequisites
+
+### Supported OS
 
 |     OS    | Linux | Windows | SmartOS | OS X |
 |:----------|:-----:|:-------:|:-------:|:----:|
 | Supported |   v   |    v    |    v    |  v   |
 
+#### Boundary Meter Versions V4.0 Or Greater
+
+To get the new meter:
+
+    curl -fsS \
+        -d "{\"token\":\"<your API token here>\"}" \
+        -H "Content-Type: application/json" \
+        "https://meter.boundary.com/setup_meter" > setup_meter.sh
+    chmod +x setup_meter.sh
+    ./setup_meter.sh
+
+#### For Boundary Meter less than V4.0
 
 |  Runtime | node.js | Python | Java |
 |:---------|:-------:|:------:|:----:|
@@ -16,9 +30,12 @@ Collects metrics from a MySQL database instance. See video [walkthrough](https:/
 - [How to install node.js?](https://help.boundary.com/hc/articles/202360701)
 
 ### Plugin Setup
+
 None
 
 #### Plugin Configuration Fields
+
+#### For All Versions
 
 |Field Name |Description                                                                                           |
 |:----------|:-----------------------------------------------------------------------------------------------------|
@@ -30,7 +47,8 @@ None
 |Source     |The Source to display in the legend for the mysql data.  It will default to the hostname of the server|
 
 ### Metrics Collected
-Tracks the following metrics for [mysql](http://www.mysql.com/)
+
+#### For All Versions
 
 |Metric Name              |Description                                                                   |
 |:------------------------|:-----------------------------------------------------------------------------|
@@ -49,3 +67,6 @@ Tracks the following metrics for [mysql](http://www.mysql.com/)
 |MySQL Query Cache Hits   |The percentage of queries from cache                                          |
 |MySQL Query Cache Prunes |The number of queries delete from the query cache                             |
 
+### References
+
+Tracks the following metrics for [mysql](http://www.mysql.com/)
