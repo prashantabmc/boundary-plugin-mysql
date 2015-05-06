@@ -1,0 +1,114 @@
+{
+  "MYSQL_ABORTED_CONNECTIONS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of failed connection attempts including those aborted by the client",
+    "displayName": "MySQL Aborted Connections",
+    "displayNameShort": "mysql-abrt-conn",
+    "unit": "number"
+  },
+  "MYSQL_BYTES_IN": {
+    "defaultAggregate": "SUM",
+    "defaultResolutionMS": 1000,
+    "description": "bytes in",
+    "displayName": "MySQL Bytes In",
+    "displayNameShort": "mysql-bytes-in",
+    "unit": "bytecount"
+  },
+  "MYSQL_BYTES_OUT": {
+    "defaultAggregate": "SUM",
+    "defaultResolutionMS": 1000,
+    "description": "bytes out",
+    "displayName": "MySQL Bytes Out",
+    "displayNameShort": "mysql-bytes-out",
+    "unit": "bytecount"
+  },
+  "MYSQL_COMMITS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number commits",
+    "displayName": "MySQL Commits",
+    "displayNameShort": "mysql-commits",
+    "unit": "number"
+  },
+  "MYSQL_CONNECTIONS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of connection attempts",
+    "displayName": "MySQL Connections",
+    "displayNameShort": "mysql-conn",
+    "unit": "number"
+  },
+  "MYSQL_QCACHE_HITS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The percentage of queries from cache",
+    "displayName": "MySQL Query Cache Hits",
+    "displayNameShort": "mysql-qry-cache",
+    "unit": "percent"
+  },
+  "MYSQL_QCACHE_MEMORY": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The percentage of used query memory",
+    "displayName": "MySQL Query Memory",
+    "displayNameShort": "mysql-qry-mem",
+    "unit": "percent"
+  },
+  "MYSQL_QCACHE_PRUNES": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of queries delete from the query cache",
+    "displayName": "MySQL Query Cache Prunes",
+    "displayNameShort": "mysql-qry-prunes",
+    "unit": "number"
+  },
+  "MYSQL_ROLLBACKS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number rollbacks",
+    "displayName": "MySQL Rollback",
+    "displayNameShort": "mysql-rollback",
+    "unit": "number"
+  },
+  "MYSQL_ROW_MODIFICATIONS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of requests to insert/update/delete a row",
+    "displayName": "MySQL Row Modification",
+    "displayNameShort": "mysql-row-mods",
+    "unit": "number"
+  },
+  "MYSQL_ROW_READS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of requests to read a row",
+    "displayName": "MySQL Row Reads",
+    "displayNameShort": "mysql-row-reads",
+    "unit": "number"
+  },
+  "MYSQL_SLOW_QUERIES": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of queries that have taken more than long_query_time seconds",
+    "displayName": "MySQL Slow Queries",
+    "displayNameShort": "mysql-slow-queries",
+    "unit": "number"
+  },
+  "MYSQL_TABLE_LOCKS": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of table locks granted",
+    "displayName": "MySQL Table Locks",
+    "displayNameShort": "mysql-tbl-locks",
+    "unit": "number"
+  },
+  "MYSQL_TABLE_LOCKS_WAIT": {
+    "defaultAggregate": "AVG",
+    "defaultResolutionMS": 1000,
+    "description": "The number of table locks that required a wait",
+    "displayName": "MySQL Table Wait Locks",
+    "displayNameShort": "mysql-tbl-wait-locks",
+    "unit": "number"
+  }
+}
