@@ -3,6 +3,8 @@
     "icon" : "icon.png",
     "command" : "node index.js",
     "postExtract" : "npm install",
+    "command_lua" : "boundary-meter index.lua",
+    "postExtract_lua" : "",
     "ignore" : "node_modules",
 
     "metrics" : [
@@ -34,7 +36,9 @@
             "title" : "Hostname",
             "name" : "hostname",
             "description" : "The hostname of the MySQL Server (Socket Path or Hostname is required)",
-            "type" : "string"
+            "type" : "string",
+            "default" : "127.0.0.1",
+            "required" : false
         },
         {
             "title" : "Port",
@@ -53,13 +57,15 @@
             "title" : "Username",
             "name" : "username",
             "description" : "Username to access the MySQL database (Username is required)",
-            "type" : "string"
+            "type" : "string",
+            "default" : ""
         },
         {
             "title" : "Password",
             "name" : "password",
             "description" : "Password to access the MySQL database (Password is required)",
-            "type" : "password"
+            "type" : "password",
+            "default" : ""
         },
         {
             "title" : "Source",
