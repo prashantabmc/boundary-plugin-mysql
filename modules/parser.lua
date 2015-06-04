@@ -19,8 +19,8 @@ limitations under the License.
 local table = require("table")
 local string = require("string")
 local Buffer = require("buffer").Buffer
-local Util = require("./util")
-local Constants = require("./constants")
+local Util = require("util")
+local Constants = require("constants")
 
 local POWS = { 1, 256, 65536, 16777216 }
 

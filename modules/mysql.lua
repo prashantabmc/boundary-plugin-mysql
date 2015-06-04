@@ -16,8 +16,8 @@ limitations under the License.
 
 --]]
 
-local Client = require("./client")
-local Constants = require("./constants")
+local Client = require("client")
+local Constants = require("constants")
 
 Error={}
 function Error:new()

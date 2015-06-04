@@ -21,14 +21,14 @@ local table = require("table")
 local math = require("math")
 local string = require("string")
 local net = require("net")
-local Constants = require("./constants")
-local Parser = require("./parser")
-local Auth = require("./auth")
-local Util = require("./util")
+local Constants = require("constants")
+local Parser = require("parser")
+local Auth = require("auth")
+local Util = require("util")
 local Buffer = require("buffer").Buffer
 local mysql = {}
-local Query = require("./query")
-local OutgoingPacket = require( "./outgoing_packet")
+local Query = require("query")
+local OutgoingPacket = require( "outgoing_packet")
 
 
 Client={}

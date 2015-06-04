@@ -16,8 +16,8 @@ limitations under the License.
 
 --]]
 
-local SHA1 = require("./sha1")
-local Util = require("./util")
+local SHA1 = require("sha1")
+local Util = require("util")
 local Auth={}
   
 function Auth.token( password, scramble )
