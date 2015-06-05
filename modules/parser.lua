@@ -20,7 +20,7 @@ local table = require("table")
 local string = require("string")
 local Buffer = require("buffer").Buffer
 local Util = require("util")
-local Constants = require("constants")
+local Constants = require("_constants")
 
 local POWS = { 1, 256, 65536, 16777216 }
 

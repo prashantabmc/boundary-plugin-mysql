@@ -27,6 +27,7 @@ function OutgoingPacket:new(sz, pktNumber )
 
   function opkt:writeNumber(bytes,n)
     assert(self.buffer and self.buffer.readUInt8) -- ensure luvit's Buffer
+    assert(n, 'you must privide n')
     self:writeByte(n % 256)
     if bytes == 1 then
       return

@@ -21,7 +21,7 @@ local table = require("table")
 local math = require("math")
 local string = require("string")
 local net = require("net")
-local Constants = require("constants")
+local Constants = require("_constants")
 local Parser = require("parser")
 local Auth = require("auth")
 local Util = require("util")
@@ -29,7 +29,6 @@ local Buffer = require("buffer").Buffer
 local mysql = {}
 local Query = require("query")
 local OutgoingPacket = require( "outgoing_packet")
-
 
 Client={}
 function Client:new(conf)
@@ -49,6 +48,8 @@ function Client:new(conf)
   if conf.port then client.port = conf.port end
   if conf.host then client.host = conf.host end
   if conf.logfunc then client.logfunc = conf.logfunc else client.logfunc = function()end end
+
+  p(client.user, client.host, client.port, client.password)
 
   client.log = client.logfunc
 
@@ -87,29 +88,14 @@ function Client:new(conf)
   client.queue = {}
   client.socket = nil
   client.parser = nil
-  
-  client.socket = net.createConnection(client.port, client.host, function(err)
+
+  client.socket = net.createConnection( client.port, client.host, function(err)
       if err then
         p(err)
         return
       end
-	  client.socket:keepalive(true, KEEP_ALIVE_TIME_MS)
-	  client.socket:setTimeout(KEEP_ALIVE_TIME_MS, callback)
       client:log("mysql:connected")
-	  
-	  client.socket:on("error", function(err)
-		local f = client:connectionErrorHandler()
-	    f(err)
-	  end )  
-	  client.socket:on("data", function(data)
-		client.parser:receive(data)
-	  end ) 
-	  client.socket:on("end", function()
-		local f = client:connectionErrorHandler()
-	  end)
-	  
     end)
-	
 
   function client:connectionErrorHandler()
     return function(err)
@@ -132,10 +118,24 @@ function Client:new(conf)
   end
 
   
+  client.socket:on("error", function(err)
+      local f = client:connectionErrorHandler()
+      f(err)
+    end ) 
+  client.socket:on("data", function(data)
+      client.parser:receive(data)
+    end ) 
+  client.socket:on("end", function()
+      local f = client:connectionErrorHandler()
+      f("socket closed")
+    end )
+  
   client.parser = Parser:new({logfunc=client.logfunc})
   client.parser:on("packet", function(packet)
       client:handlePacket(packet)
     end)
+
+
     
   function client:handlePacket(packet)
     self.log("client.handlePacket called.  packet type:", packet.type )

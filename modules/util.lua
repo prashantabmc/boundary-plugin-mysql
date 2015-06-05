@@ -19,7 +19,7 @@ limitations under the License.
 local table = require("table")
 local string = require("string")
 local Bit = require("bit")
-local Constants = require("constants")
+local Constants = require("_constants")
 
 local Util = {}
 

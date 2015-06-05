@@ -18,7 +18,7 @@ limitations under the License.
 
 local Parser = require("parser")
 local Util = require("util")
-local Constants = require("constants")
+local Constants = require("_constants")
 local table = require("table")
 local math = require("math")
 
