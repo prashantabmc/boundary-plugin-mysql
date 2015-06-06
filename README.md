@@ -2,9 +2,9 @@
 
 Collects metrics from a MySQL database instance. See video [walkthrough](https://help.boundary.com/hc/articles/201536772).
 
-## Prerequisites
+### Prerequisites
 
-### Supported OS
+#### Supported OS
 
 |     OS    | Linux | Windows | SmartOS | OS X |
 |:----------|:-----:|:-------:|:-------:|:----:|
@@ -12,8 +12,8 @@ Collects metrics from a MySQL database instance. See video [walkthrough](https:/
 
 #### Boundary Meter Versions V4.0 Or Later
 
-- To install new meter go to Settings->Installation or [see instructons|https://help.boundary.com/hc/en-us/sections/200634331-Installation]. 
-- To upgrade the meter to the latest version - [see instructons|https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter].
+- To install new meter go to Settings->Installation or [see instructons](https://help.boundary.com/hc/en-us/sections/200634331-Installation).
+- To upgrade the meter to the latest version - [see instructons](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
 
 #### For Boundary Meter less than V4.0
 
@@ -35,10 +35,10 @@ None
 |:----------|:-----------------------------------------------------------------------------------------------------|
 |Hostname   |The hostname of the MySQL Server (Socket Path or Hostname is required)                                |
 |Port       |Port to use when accessing the MySQL Server                                                           |
-|Socket Path|The Socket Path used to access the MySQL Server (Socket Path or Hostname is required)                 |
 |Username   |Username to access the MySQL database (Username is required)                                          |
 |Password   |Password to access the MySQL database (Password is required)                                          |
 |Source     |The Source to display in the legend for the mysql data.  It will default to the hostname of the server|
+|Poll Interval | How often to poll for metrics |
 
 ### Metrics Collected
 
@@ -60,6 +60,10 @@ None
 |MySQL Query Memory       |The percentage of used query memory                                           |
 |MySQL Query Cache Hits   |The percentage of queries from cache                                          |
 |MySQL Query Cache Prunes |The number of queries delete from the query cache                             |
+
+### Dashboards
+
+- MySQL
 
 ### References
 
