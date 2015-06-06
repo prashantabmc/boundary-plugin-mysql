@@ -49,8 +49,6 @@ function Client:new(conf)
   if conf.host then client.host = conf.host end
   if conf.logfunc then client.logfunc = conf.logfunc else client.logfunc = function()end end
 
-  p(client.user, client.host, client.port, client.password)
-
   client.log = client.logfunc
 
   
