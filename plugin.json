@@ -51,12 +51,6 @@
             "default": 3306
         },
         {
-            "title" : "Socket Path",
-            "name" : "socketPath",
-            "description" : "The Socket Path used to access the MySQL Server (Socket Path or Hostname is required)",
-            "type" : "string"
-        },
-        {
             "title" : "Username",
             "name" : "username",
             "description" : "Username to access the MySQL database (Username is required)",
@@ -69,6 +63,14 @@
             "description" : "Password to access the MySQL database (Password is required)",
             "type" : "password",
             "default" : ""
+        },
+        {
+          "title": "Poll Interval",
+          "name": "pollInterval",
+          "description": "How often (in milliseconds) to poll for metrics.",
+          "type" : "integer",
+          "default" : 1000,
+          "required" : false
         },
         {
             "title" : "Source",
