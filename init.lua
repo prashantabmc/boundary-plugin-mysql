@@ -32,10 +32,12 @@ function MySQLDataSource:initialize(opts)
   self.user = opts.user or 'root'
   self.password = opts.password
   self.logging = false
-  self.client = mysql.createClient(self)
 end
 
 function MySQLDataSource:fetch(context, callback, params)
+  if not self.client then
+    self.client = mysql.createClient(self)
+  end
   self.client:query('SHOW /*!50002 GLOBAL */ STATUS', function (err, status, fields) 
     if err then
       self:emit('error', err.message)
