@@ -1,13 +1,21 @@
-Boundary MySQL Plugin
----------------------
+# Boundary MySQL Plugin
+
 Collects metrics from a MySQL database instance. See video [walkthrough](https://help.boundary.com/hc/articles/201536772).
 
 ### Prerequisites
+
+#### Supported OS
 
 |     OS    | Linux | Windows | SmartOS | OS X |
 |:----------|:-----:|:-------:|:-------:|:----:|
 | Supported |   v   |    v    |    v    |  v   |
 
+#### Boundary Meter Versions V4.0 Or Later
+
+- To install new meter go to Settings->Installation or [see instructons](https://help.boundary.com/hc/en-us/sections/200634331-Installation).
+- To upgrade the meter to the latest version - [see instructons](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
+
+#### For Boundary Meter less than V4.0
 
 |  Runtime | node.js | Python | Java |
 |:---------|:-------:|:------:|:----:|
@@ -16,21 +24,25 @@ Collects metrics from a MySQL database instance. See video [walkthrough](https:/
 - [How to install node.js?](https://help.boundary.com/hc/articles/202360701)
 
 ### Plugin Setup
+
 None
 
 #### Plugin Configuration Fields
+
+#### For All Versions
 
 |Field Name |Description                                                                                           |
 |:----------|:-----------------------------------------------------------------------------------------------------|
 |Hostname   |The hostname of the MySQL Server (Socket Path or Hostname is required)                                |
 |Port       |Port to use when accessing the MySQL Server                                                           |
-|Socket Path|The Socket Path used to access the MySQL Server (Socket Path or Hostname is required)                 |
 |Username   |Username to access the MySQL database (Username is required)                                          |
 |Password   |Password to access the MySQL database (Password is required)                                          |
 |Source     |The Source to display in the legend for the mysql data.  It will default to the hostname of the server|
+|Poll Interval | How often to poll for metrics |
 
 ### Metrics Collected
-Tracks the following metrics for [mysql](http://www.mysql.com/)
+
+#### For All Versions
 
 |Metric Name              |Description                                                                   |
 |:------------------------|:-----------------------------------------------------------------------------|
@@ -49,3 +61,10 @@ Tracks the following metrics for [mysql](http://www.mysql.com/)
 |MySQL Query Cache Hits   |The percentage of queries from cache                                          |
 |MySQL Query Cache Prunes |The number of queries delete from the query cache                             |
 
+### Dashboards
+
+- MySQL
+
+### References
+
+Tracks the following metrics for [mysql](http://www.mysql.com/)
