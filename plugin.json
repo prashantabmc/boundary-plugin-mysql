@@ -1,7 +1,8 @@
 {
     "name" : "Boundary MySQL Plugin",
-    "version" : "0.9.0",
+    "version" : "0.9.1",
     "meterVersionRequired": "4.2.0-611",
+    "unsupportedPlatforms" : [],
     "tags" : "mysql",
     "description" : "Displays important mysql metrics",
     "icon" : "icon.png",
