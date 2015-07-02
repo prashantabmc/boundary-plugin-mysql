@@ -23,14 +23,26 @@ local Constants = require("_constants")
 
 local Util = {}
 
-function Util.byteArrayToString(t)
-  local out = {}
-  for i,b in ipairs(t) do
-    out[i] = string.char(b)
+-- convert luvit buffer to binary string
+function Util.bufferToString(b)
+  local t ={}
+  for i=1,b.length do
+    t[i] = string.char(b[i])
   end
-  return table.concat(out, "")  
+  return table.concat(t)  
 end
 
+function Util.byteArrayToString(t)
+  local out = {}
+  if t.length then
+    return Util.bufferToString(t) 
+  else
+    for i,b in ipairs(t) do
+      out[i] = string.char(b)
+    end
+    return table.concat(out, "")
+  end
+end
 
 -- xor 2 string
 function Util.xor(a,b)
@@ -42,14 +54,6 @@ function Util.xor(a,b)
   return Util.byteArrayToString(out)
 end
 
--- convert luvit buffer to binary string
-function Util.bufferToString(b)
-  local t ={}
-  for i=1,b.length do
-    t[i] = string.char(b[i])
-  end
-  return table.concat(t)  
-end
 function Util.dumpStringBytes(t)
   local ttt ={}
   for i=1,#t do

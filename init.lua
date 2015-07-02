@@ -28,10 +28,11 @@ local acc = Accumulator:new()
 local MySQLDataSource = DataSource:extend()
 function MySQLDataSource:initialize(opts)
   self.host = opts.host or 'localhost'
-  self.port = opts.port or '3306'
+  self.port = opts.port or 3306
   self.user = opts.user or 'root'
   self.password = opts.password
-  self.logging = false
+  self.logging = true 
+--  self.logfunc = p
 end
 
 function MySQLDataSource:fetch(context, callback, params)

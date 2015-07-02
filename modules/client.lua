@@ -29,10 +29,11 @@ local Buffer = require("buffer").Buffer
 local mysql = {}
 local Query = require("query")
 local OutgoingPacket = require( "outgoing_packet")
+local Emitter = require('core').Emitter
 
-Client={}
+local Client = Emitter:extend()
 function Client:new(conf)
-  local client = {}
+  local client = Emitter:new()
 
   -- defaults
   client.host = "127.0.0.1"
@@ -98,6 +99,9 @@ function Client:new(conf)
   function client:connectionErrorHandler()
     return function(err)
       local task = self.queue[1]
+      if not task then
+        self:emit('error', err)
+      end
       local delegate = nil
       if task.delegate then delegate = task.delegate end
 
@@ -258,7 +262,6 @@ function Client:new(conf)
   end
   
   function client:write( packet )
-    
     local s = Util.bufferToString(packet.buffer)    
     self.log( "->", packet.buffer.length, #s, packet.buffer:inspect() )
     local wlen = self.socket:write( s, function(err)
