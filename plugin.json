@@ -66,7 +66,7 @@
             "default" : ""
         },
         {
-          "title": "Poll Interval",
+          "title": "Poll Interval (ms)",
           "name": "pollInterval",
           "description": "How often (in milliseconds) to poll for metrics.",
           "type" : "integer",
