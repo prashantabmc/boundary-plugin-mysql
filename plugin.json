@@ -48,7 +48,7 @@
             "title" : "Port",
             "name" : "port",
             "description" : "Port to use when accessing the MySQL Server",
-            "type" : "string",
+            "type" : "integer",
             "default": 3306
         },
         {
