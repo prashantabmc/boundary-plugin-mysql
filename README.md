@@ -10,10 +10,10 @@ Collects metrics from a MySQL database instance. See video [walkthrough](https:/
 |:----------|:-----:|:-------:|:-------:|:----:|
 | Supported |   v   |    v    |    v    |  v   |
 
-#### Boundary Meter Versions v4.2 or Later
+#### Boundary Meter versions v4.2 or later
 
-- To install new meter go to Settings->Installation or [see instructons](https://help.boundary.com/hc/en-us/sections/200634331-Installation).
-- To upgrade the meter to the latest version - [see instructons](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
+- To install new meter go to Settings->Installation or [see instructions](https://help.boundary.com/hc/en-us/sections/200634331-Installation).
+- To upgrade the meter to the latest version - [see instructions](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
 
 #### For Boundary Meter earlier than v4.2
 
@@ -38,7 +38,7 @@ None
 |Username   |Username to access the MySQL database (Username is required)                                          |
 |Password   |Password to access the MySQL database (Password is required)                                          |
 |Source     |The Source to display in the legend for the mysql data.  It will default to the hostname of the server|
-|Poll Interval | How often to poll for metrics |
+|Poll Interval | How often (in milliseconds) to poll for metrics |
 
 ### Metrics Collected
 

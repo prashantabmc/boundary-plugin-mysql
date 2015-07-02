@@ -1,7 +1,8 @@
 {
     "name" : "Boundary MySQL Plugin",
-    "version" : "0.9.0",
+    "version" : "0.9.1",
     "meterVersionRequired": "4.2.0-611",
+    "unsupportedPlatforms" : [],
     "tags" : "mysql",
     "description" : "Displays important mysql metrics",
     "icon" : "icon.png",
@@ -48,7 +49,7 @@
             "title" : "Port",
             "name" : "port",
             "description" : "Port to use when accessing the MySQL Server",
-            "type" : "string",
+            "type" : "integer",
             "default": 3306
         },
         {
@@ -66,7 +67,7 @@
             "default" : ""
         },
         {
-          "title": "Poll Interval",
+          "title": "Poll Interval (ms)",
           "name": "pollInterval",
           "description": "How often (in milliseconds) to poll for metrics.",
           "type" : "integer",
