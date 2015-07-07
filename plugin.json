@@ -38,9 +38,9 @@
 
     "paramSchema" : [
         {
-            "title" : "Hostname",
-            "name" : "hostname",
-            "description" : "The hostname of the MySQL Server",
+            "title" : "Host",
+            "name" : "host",
+            "description" : "The host of the MySQL Server",
             "type" : "string",
             "default" : "127.0.0.1",
             "required" : true 
