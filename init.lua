@@ -17,7 +17,6 @@ local Plugin = framework.Plugin
 local DataSource = framework.DataSource
 local Accumulator = framework.Accumulator
 local mysql = require('mysql')
-local parseValue = framework.util.parseValue
 local sum = framework.util.sum
 local merge = framework.table.merge
 
