@@ -34,7 +34,7 @@ function MySQLDataSource:initialize(opts)
 end
 
 function MySQLDataSource:fetch(context, callback, params)
-  if not self.client or not self.client.connect then
+  if not self.client or not self.client.connected then
     self.client = mysql.createClient(self)
     self.client:propagate('error', self)
   end
