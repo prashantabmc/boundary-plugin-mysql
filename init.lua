@@ -36,7 +36,7 @@ function MySQLDataSource:initialize(opts)
 end
 
 function MySQLDataSource:fetch(context, callback, params)
-  if not self.client then
+  if not self.client or not self.client.connect then
     self.client = mysql.createClient(self)
   end
   self.client:query('SHOW /*!50002 GLOBAL */ STATUS', function (err, status, fields) 
