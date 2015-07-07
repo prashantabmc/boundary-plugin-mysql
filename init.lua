@@ -17,7 +17,6 @@ local Plugin = framework.Plugin
 local DataSource = framework.DataSource
 local Accumulator = framework.Accumulator
 local mysql = require('mysql')
-local parseValue = framework.util.parseValue
 local sum = framework.util.sum
 local merge = framework.table.merge
 
@@ -32,12 +31,12 @@ function MySQLDataSource:initialize(opts)
   self.user = opts.user or 'root'
   self.password = opts.password
   self.logging = true 
---  self.logfunc = p
 end
 
 function MySQLDataSource:fetch(context, callback, params)
-  if not self.client then
+  if not self.client or not self.client.connected then
     self.client = mysql.createClient(self)
+    self.client:propagate('error', self)
   end
   self.client:query('SHOW /*!50002 GLOBAL */ STATUS', function (err, status, fields) 
     if err then

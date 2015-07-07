@@ -90,7 +90,7 @@ function Client:new(conf)
 
   client.socket = net.createConnection( client.port, client.host, function(err)
       if err then
-        p(err)
+        self:emit('error', err)
         return
       end
       client:log("mysql:connected")
@@ -101,6 +101,7 @@ function Client:new(conf)
       local task = self.queue[1]
       if not task then
         self:emit('error', err)
+        return
       end
       local delegate = nil
       if task.delegate then delegate = task.delegate end
