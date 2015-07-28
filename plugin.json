@@ -50,35 +50,39 @@
             "name" : "port",
             "description" : "Port to use when accessing the MySQL Server",
             "type" : "integer",
-            "default": 3306
+            "default": 3306,
+            "required" : true
         },
         {
             "title" : "Username",
             "name" : "username",
             "description" : "Username to access the MySQL database (Username is required)",
             "type" : "string",
-            "default" : ""
+            "default" : "",
+            "required" : false
         },
         {
             "title" : "Password",
             "name" : "password",
             "description" : "Password to access the MySQL database (Password is required)",
             "type" : "password",
-            "default" : ""
+            "default" : "",
+            "required" : false
         },
         {
-          "title": "Poll Interval (ms)",
-          "name": "pollInterval",
-          "description": "How often (in milliseconds) to poll for metrics.",
-          "type" : "integer",
-          "default" : 1000,
-          "required" : false
+            "title": "Poll Interval (ms)",
+            "name": "pollInterval",
+            "description": "How often (in milliseconds) to poll for metrics.",
+            "type" : "integer",
+            "default" : 1000,
+            "required" : false
         },
         {
             "title" : "Source",
             "name" : "source",
             "description" : "The Source to display in the legend for the mysql data.  It will default to the hostname of the server",
-            "type" : "string"
+            "type" : "string",
+            "required" : false
         }
     ]
 }
