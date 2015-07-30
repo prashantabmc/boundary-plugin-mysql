@@ -28,7 +28,7 @@ local MySQLDataSource = DataSource:extend()
 function MySQLDataSource:initialize(opts)
   self.host = opts.host or 'localhost'
   self.port = opts.port or 3306
-  self.user = opts.user or 'root'
+  self.user = opts.username or 'root'
   self.password = opts.password
   self.logging = true 
 end
