@@ -28,7 +28,7 @@ local notEmpty = framework.string.notEmpty
 local params = framework.params
 params.items = params.items or {}
 
-local cache = Cache:new(function () return Accumulator:new() end)
+local cache = Cache(function () return Accumulator() end)
 
 local MySQLDataSource = DataSource:extend()
 function MySQLDataSource:initialize(opts)
@@ -77,12 +77,12 @@ end
 local function poller(item)
   item.pollInterval = notEmpty(item.pollInterval, 1000)
   local ds = MySQLDataSource:new(item)
-  local p = DataSourcePoller:new(item.pollInterval, ds)
+  local p = DataSourcePoller(item.pollInterval, ds)
   return p 
 end
 
 local function createPollers(items)
-  local pollers = PollerCollection:new()
+  local pollers = PollerCollection()
   for _, i in ipairs(items) do
     pollers:add(poller(i))
   end
@@ -91,7 +91,7 @@ end
 
 local pollers = createPollers(params.items)
 
-local plugin = Plugin:new({ pollInterval = 1000 }, pollers)
+local plugin = Plugin({ pollInterval = 1000 }, pollers)
 function plugin:onParseValues(data, extra)
   local result = {}
   local metric = function (...)
