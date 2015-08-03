@@ -1,6 +1,6 @@
 {
     "name" : "Boundary MySQL Plugin",
-    "version" : "0.9.1",
+    "version" : "0.9.2",
     "meterVersionRequired": "4.2.0-611",
     "unsupportedPlatforms" : [],
     "tags" : "mysql",
@@ -35,6 +35,13 @@
             "layout": "d-w=4&d-h=5&d-pad=5&d-bg=black&d-g-MYSQL_TABLE_LOCKS_WAIT=3-4-1-1&d-g-MYSQL_QCACHE_PRUNES=3-3-1-1&d-g-MYSQL_ROW_READS=2-2-1-1&d-g-MYSQL_ROW_MODIFICATIONS=2-0-1-1&d-g-MYSQL_COMMITS=2-1-1-1&d-g-MYSQL_QCACHE_MEMORY=2-3-1-1&d-g-MYSQL_ROLLBACKS=2-4-1-1&d-g-MYSQL_CONNECTIONS=0-0-2-1&d-g-MYSQL_QCACHE_HITS=0-1-2-1&d-g-MYSQL_TABLE_LOCKS=0-2-2-1&d-g-MYSQL_BYTES_IN=0-3-2-2-t&d-g-MYSQL_BYTES_OUT=0-3-2-2-b&d-g-MYSQL_ABORTED_CONNECTIONS=3-2-1-1&d-g-MYSQL_SLOW_QUERIES=3-0-1-2"
         }
     ],
+
+    "paramArray": {
+        "itemTitle": [
+            "host","source"
+        ],
+        "schemaTitle": "Host"
+    },
 
     "paramSchema" : [
         {

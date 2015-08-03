@@ -19,10 +19,16 @@ local Accumulator = framework.Accumulator
 local mysql = require('mysql')
 local sum = framework.util.sum
 local merge = framework.table.merge
+local PollerCollection = framework.PollerCollection
+local DataSourcePoller = framework.DataSourcePoller
+local Cache = framework.Cache
+local ipack = framework.util.ipack
+local notEmpty = framework.string.notEmpty
 
 local params = framework.params
+params.items = params.items or {}
 
-local acc = Accumulator:new()
+local cache = Cache:new(function () return Accumulator:new() end)
 
 local MySQLDataSource = DataSource:extend()
 function MySQLDataSource:initialize(opts)
@@ -31,6 +37,7 @@ function MySQLDataSource:initialize(opts)
   self.user = opts.username or 'root'
   self.password = opts.password
   self.logging = true 
+  self.source = opts.source
 end
 
 function MySQLDataSource:fetch(context, callback, params)
@@ -47,49 +54,69 @@ function MySQLDataSource:fetch(context, callback, params)
           self:emit('error', err.message)
         else
           local result = merge(status, variables)
-          callback(result)
+          callback(result, { context = self })
         end
       end)
     end
   end)
 end
 
-local function parse(data)
+local function parse(data, context)
   local result = { curr = {}, diff = {}}
+  local acc = cache:get(context.source)
   for _, row in ipairs(data) do
     local value = tonumber(row.Value)
     if value then
-      result.diff[row.Variable_name] = acc:accumulate(row.Variable_name, value)
+      result.diff[row.Variable_name] = acc(row.Variable_name, value)
       result.curr[row.Variable_name] = value
     end
   end
   return result
 end
 
-local ds = MySQLDataSource:new(params)
+local function poller(item)
+  item.pollInterval = notEmpty(item.pollInterval, 1000)
+  local ds = MySQLDataSource:new(item)
+  local p = DataSourcePoller:new(item.pollInterval, ds)
+  return p 
+end
 
-local plugin = Plugin:new(params, ds)
-function plugin:onParseValues(data)
+local function createPollers(items)
+  local pollers = PollerCollection:new()
+  for _, i in ipairs(items) do
+    pollers:add(poller(i))
+  end
+  return pollers
+end
+
+local pollers = createPollers(params.items)
+
+local plugin = Plugin:new({ pollInterval = 1000 }, pollers)
+function plugin:onParseValues(data, extra)
   local result = {}
-  local parsed = parse(data)
+  local metric = function (...)
+    ipack(result, ...)
+  end
+  local parsed = parse(data, extra.context)
   local curr = parsed.curr
   local diff = parsed.diff
   local qcache_memory_usage = (curr.query_cache_size - curr.Qcache_free_memory) / curr.query_cache_size;
   local qcache_hits = (diff.Com_select + diff.Qcache_hits) ~= 0 and (diff.Qcache_hits / (diff.Com_select + diff.Qcache_hits)) or 0
-  result['MYSQL_CONNECTIONS'] = diff.Connections
-  result['MYSQL_ABORTED_CONNECTIONS'] = sum({ diff.Aborted_connects, diff.Aborted_clients }) 
-  result['MYSQL_BYTES_IN'] = diff.Bytes_received
-  result['MYSQL_BYTES_OUT'] = diff.Bytes_sent
-  result['MYSQL_SLOW_QUERIES'] = diff.Slow_queries
-  result['MYSQL_ROW_MODIFICATIONS'] = sum({ diff.Handler_write, diff.Handler_update, diff.Handler_delete })
-  result['MYSQL_ROW_READS'] = sum({ diff.Handler_read_first, diff.Handler_read_key, diff.Handler_read_next, diff.Handler_read_prev, diff.Handler_read_rnd, diff.Handler_read_rnd_next })
-  result['MYSQL_TABLE_LOCKS'] = diff.Table_locks_immediate
-  result['MYSQL_TABLE_LOCKS_WAIT'] = diff.Table_locks_waited
-  result['MYSQL_COMMITS'] = diff.Handler_commit
-  result['MYSQL_ROLLBACKS'] = diff.Handler_rollback
-  result['MYSQL_QCACHE_HITS'] = qcache_hits
-  result['MYSQL_QCACHE_PRUNES'] = diff.Qcache_lowmem_prunes
-  result['MYSQL_QCACHE_MEMORY'] = qcache_memory_usage
+  local source = extra.context.source
+  metric('MYSQL_CONNECTIONS', diff.Connections, nil, source)
+  metric('MYSQL_ABORTED_CONNECTIONS', sum({ diff.Aborted_connects, diff.Aborted_clients }), nil, source)
+  metric('MYSQL_BYTES_IN', diff.Bytes_received, nil, source)
+  metric('MYSQL_BYTES_OUT', diff.Bytes_sent, nil, source)
+  metric('MYSQL_SLOW_QUERIES', diff.Slow_queries, nil, source)
+  metric('MYSQL_ROW_MODIFICATIONS', sum({ diff.Handler_write, diff.Handler_update, diff.Handler_delete }), nil, source)
+  metric('MYSQL_ROW_READS', sum({ diff.Handler_read_first, diff.Handler_read_key, diff.Handler_read_next, diff.Handler_read_prev, diff.Handler_read_rnd, diff.Handler_read_rnd_next }), nil, source)
+  metric('MYSQL_TABLE_LOCKS', diff.Table_locks_immediate, nil, source)
+  metric('MYSQL_TABLE_LOCKS_WAIT', diff.Table_locks_waited, nil, source)
+  metric('MYSQL_COMMITS', diff.Handler_commit, nil, source)
+  metric('MYSQL_ROLLBACKS', diff.Handler_rollback, nil, source)
+  metric('MYSQL_QCACHE_HITS', qcache_hits, nil, source)
+  metric('MYSQL_QCACHE_PRUNES', diff.Qcache_lowmem_prunes, nil, source)
+  metric('MYSQL_QCACHE_MEMORY', qcache_memory_usage, nil, source)
   return result
 end
 
