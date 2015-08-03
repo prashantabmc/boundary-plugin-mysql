@@ -24,6 +24,7 @@ local DataSourcePoller = framework.DataSourcePoller
 local Cache = framework.Cache
 local ipack = framework.util.ipack
 local notEmpty = framework.string.notEmpty
+local ratio = framework.util.ratio
 
 local params = framework.params
 params.items = params.items or {}
@@ -101,7 +102,7 @@ function plugin:onParseValues(data, extra)
   local curr = parsed.curr
   local diff = parsed.diff
   local qcache_memory_usage = (curr.query_cache_size - curr.Qcache_free_memory) / curr.query_cache_size;
-  local qcache_hits = (diff.Com_select + diff.Qcache_hits) ~= 0 and (diff.Qcache_hits / (diff.Com_select + diff.Qcache_hits)) or 0
+  local qcache_hits = ratio(diff.Qcache_hits, diff.Com_select + diff.Qcache_hits)
   local source = extra.context.source
   metric('MYSQL_CONNECTIONS', diff.Connections, nil, source)
   metric('MYSQL_ABORTED_CONNECTIONS', sum({ diff.Aborted_connects, diff.Aborted_clients }), nil, source)
