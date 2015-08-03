@@ -89,7 +89,7 @@
             "name" : "source",
             "description" : "The Source to display in the legend for the mysql data.  It will default to the hostname of the server",
             "type" : "string",
-            "required" : false
+            "required" : true 
         }
     ]
 }
