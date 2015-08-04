@@ -1,7 +1,10 @@
 {
-   "hostname": "localhost",
-   "port": 3306,
-   "username": "root",
-   "password": "123456",
-   "pollInterval": 1000
+  "items" : [ {
+    "hostname": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "123456",
+    "pollInterval": 1000,
+    "source" : "mysql-master"
+  }]
 }

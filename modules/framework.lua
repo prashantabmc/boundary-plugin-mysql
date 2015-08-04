@@ -42,7 +42,18 @@ local boundary = require('boundary')
 local io = require('io')
 local hrtime = require('uv').Process.hrtime
 
-framework.version = '0.9.6'
+local callable = function (class, func)
+  class.meta.__call = func 
+end
+
+local factory = function (class)
+  local mt = getmetatable(class)
+  mt.__call = function (t, ...)
+    return t:new(...)
+  end
+end
+
+framework.version = '0.9.8'
 framework.boundary = boundary
 framework.params = boundary.param or json.parse(fs.readFileSync('param.json')) or {}
 framework.plugin_params = boundary.plugin or json.parse(fs.readFileSync('plugin.json')) or {}
@@ -873,6 +884,7 @@ exportable(framework.http)
 -- Work as a cache of values
 -- @type Cache
 local Cache = Object:extend()
+factory(Cache, factory)
 
 --- Cache constructor.
 -- @name Cache:new
@@ -1014,7 +1026,7 @@ function NetDataSource:fetch(context, callback)
     self:onFetch(self.socket)
     if callback then
       self.socket:once('data', function (data)
-        callback(data)
+        callback(data, {context = self})
         if self.close_connection then
           self:disconnect()
         end
@@ -1051,6 +1063,7 @@ framework.NetDataSource = NetDataSource
 --- DataSourcePoller class
 -- @type DataSourcePoller
 local DataSourcePoller = Emitter:extend()
+factory(DataSourcePoller)
 
 --- DataSourcePoller constructor.
 -- DataSourcePoller Polls a DataSource at the specified interval and calls a callback when there is some data available.
@@ -1088,6 +1101,7 @@ end
 -- @type Plugin
 local Plugin = Emitter:extend()
 framework.Plugin = Plugin
+factory(Plugin)
 
 --- Plugin constructor.
 -- A base plugin implementation that accept a dataSource and polls periodically for new data and format the output so the boundary meter can collect the metrics.
@@ -1272,6 +1286,7 @@ end
 --- Acumulator Class
 -- @type Accumulator
 local Accumulator = Emitter:extend()
+factory(Accumulator)
 
 --- Accumulator constructor.
 -- Track values and return the delta for accumulated metrics.
@@ -1316,15 +1331,14 @@ function Accumulator:resetAll()
 end
 
 -- The object instance can be used as a function call that calls accumulate.
-Accumulator.meta.__call = function (t, ...) 
-  return t:accumulate(...)  
-end
+callable(Accumulator, function (t, ...) return t:accumulate(...) end)
 
 framework.Accumulator = Accumulator
 
 --- A Collection of DataSourcePoller
 -- @type PollerCollection
 local PollerCollection = Emitter:extend()
+factory(PollerCollection)
 
 --- PollerCollection constructor
 -- @param[opt] pollers a list of poller to initially add to this collection.
