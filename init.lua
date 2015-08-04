@@ -48,11 +48,13 @@ function MySQLDataSource:fetch(context, callback, params)
   end
   self.client:query('SHOW /*!50002 GLOBAL */ STATUS', function (err, status, fields) 
     if err then
-      self:emit('error', err.message)
+      err.source = self.source
+      self:emit('error', err)
     else
       self.client:query('SHOW GLOBAL VARIABLES', function (err, variables, fields)
         if (err) then
-          self:emit('error', err.message)
+          err.source = self.source
+          self:emit('error', err)
         else
           local result = merge(status, variables)
           callback(result, { context = self })
