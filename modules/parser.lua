@@ -562,6 +562,8 @@ function Parser:new(conf)
           end          
         end        
       elseif self.state == 47 then -- Parser.STATE_COLUMN_VALUE_STRING
+        --print("DEBUG:","self.packet.columnLength:",self.packet.columnLength) -- prashanta
+        if self.packet.columnLength == nil then self.packet.columnLength=0 toBreak = true end -- prashanta  added
         local remaining = self.packet.columnLength - self.packet.index
         self.log("remaining:", remaining )
         local toRead

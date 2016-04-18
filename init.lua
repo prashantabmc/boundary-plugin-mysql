@@ -33,12 +33,17 @@ local cache = Cache(function () return Accumulator() end)
 
 local MySQLDataSource = DataSource:extend()
 function MySQLDataSource:initialize(opts)
-  self.host = opts.host or 'localhost'
+  --[[print("DEBUG:","hostname:",opts.hostname)
+  print("DEBUG:","port:",opts.port)
+  print("DEBUG:","username:",opts.username)
+  print("DEBUG:","password:",opts.password) ]]--
+  self.host = opts.hostname or 'localhost'
   self.port = opts.port or 3306
   self.user = opts.username or 'root'
   self.password = opts.password
   self.logging = true 
   self.source = opts.source
+  self.wait_for_end = true -- prashanta added 
 end
 
 function MySQLDataSource:fetch(context, callback, params)
@@ -46,15 +51,23 @@ function MySQLDataSource:fetch(context, callback, params)
     self.client = mysql.createClient(self)
     self.client:propagate('error', self)
   end
+  print("DEBUG:", "inside MySQL:",self.client) 
+  -- print("DEBUG:",debug.traceback())  -- prashanta
   self.client:query('SHOW /*!50002 GLOBAL */ STATUS', function (err, status, fields) 
+        print("DEBUG:show status","fields:",fields)-- prashanta added
     if err then
+    print("DEBUG:","error in SHOW...")
       err.source = self.source
       self:emit('error', err)
+      --callback(nil, err)  -- prashanta
     else
+      print("DEBUG:","SHOW GLOBAL VAIABLES...")
       self.client:query('SHOW GLOBAL VARIABLES', function (err, variables, fields)
+        print("DEBUG:show GLOBAL","fields:",fields)-- prashanta added
         if (err) then
-          err.source = self.source
+           err.source = self.source  
           self:emit('error', err)
+          --callback(nil, err)  -- prashanta
         else
           local result = merge(status, variables)
           callback(result, { context = self })
@@ -101,6 +114,7 @@ function plugin:onParseValues(data, extra)
     ipack(result, ...)
   end
   local parsed = parse(data, extra.context)
+  print("DEBUG:","parse:",parse)
   local curr = parsed.curr
   local diff = parsed.diff
   local qcache_memory_usage = (curr.query_cache_size - curr.Qcache_free_memory) / curr.query_cache_size;

@@ -1,10 +1,10 @@
 {
   "items" : [ {
-    "hostname": "localhost",
+    "hostname": "bmcmysql.ce0yjxepp6wa.us-west-2.rds.amazonaws.com",
     "port": 3306,
     "username": "root",
-    "password": "123456",
-    "pollInterval": 1000,
+    "password": "bmcAdm1n",
+    "pollInterval": 5000,
     "source" : "mysql-master"
   }]
 }
